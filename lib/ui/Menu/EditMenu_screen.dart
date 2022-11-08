@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../model/product.dart';
+import '../../model/Menu.dart';
 import '../share/dialog_utils.dart';
-import 'products_manager.dart';
+import 'Menu_manager.dart';
 
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
   EditProductScreen(
-    Product? product, {
+    Menu? product, {
     super.key,
   }) {
     if (product == null) {
-      this.product = Product(
+      this.product1 = Menu(
         id: null,
         title: '',
-        price: 0,
+       
         description: '',
         imageUrl: '',
       );
     } else {
-      this.product = product;
+      this.product1 = product;
     }
   }
-  late final Product product;
+  late final Menu product1;
   @override
   State<EditProductScreen> createState() => _EditProductScreenState();
 }
@@ -31,7 +31,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
   final _editForm = GlobalKey<FormState>();
-  late Product _editedProduct;
+  late Menu _editedProduct;
   var _isLoading = false;
   bool _isValidImageUrl(String value) {
     return (value.startsWith('http') || value.startsWith('http')) &&
@@ -48,7 +48,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         setState(() {});
       }
     });
-    _editedProduct = widget.product;
+    _editedProduct = widget.product1;
     _imageUrlController.text = _editedProduct.imageUrl;
   }
 
@@ -69,7 +69,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
     try {
-      final productsManager = context.read<ProductManager>();
+      final productsManager = context.read<MenuManager>();
       if (_editedProduct.id != null) {
         await productsManager.updateProduct(_editedProduct);
       } else {
@@ -109,7 +109,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: ListView(
                   children: <Widget>[
                     buildTitleField(),
-                    buildPriceField(),
+                   
                     buildDescriptionField(),
                     buildProductPreview(),
                   ],
@@ -134,29 +134,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     );
   }
 
-  TextFormField buildPriceField() {
-    return TextFormField(
-      initialValue: _editedProduct.price.toString(),
-      decoration: const InputDecoration(labelText: 'Price'),
-      textInputAction: TextInputAction.next,
-      keyboardType: TextInputType.number,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Please enter Price';
-        }
-        if (double.tryParse(value) == null) {
-          return 'Please enter a valid number';
-        }
-        if (double.parse(value) <= 0) {
-          return 'Please enter a number greater than zero';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(price: double.parse(value!));
-      },
-    );
-  }
+  
 
   TextFormField buildDescriptionField() {
     return TextFormField(

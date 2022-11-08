@@ -1,12 +1,12 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
-import 'package:myshop/ui/cart/cart_manager.dart';
-import 'package:myshop/ui/cart/cart_screen.dart';
-import 'package:myshop/ui/products/products_manager.dart';
+import 'package:myshop/ui/ListMenu/ListMenu_manager.dart';
+import 'package:myshop/ui/ListMenu/ListMenu_screen.dart';
+import 'package:myshop/ui/Menu/Menu_manager.dart';
 import 'package:myshop/ui/share/app_drawer.dart';
 import 'package:provider/provider.dart';
-import 'product_grid.dart';
+import 'Menu_grid.dart';
 import 'top_right_badge.dart';
 
 
@@ -26,7 +26,7 @@ class _ProductOverviewScreen extends State<ProductOverviewScreen> {
   @override
   void initState(){
     super.initState();
-    _fetchProducts = context.read<ProductManager>().fetchProduct();
+    _fetchProducts = context.read<MenuManager>().fetchProduct();
   }
 
   @override
@@ -46,7 +46,7 @@ class _ProductOverviewScreen extends State<ProductOverviewScreen> {
           if(snapshot.connectionState == ConnectionState.done){
             return ValueListenableBuilder<bool>(valueListenable: _showOnlyFavorite, 
             builder: (context, value, child) {
-              return ProductGrid(value);
+              return MenuGrid(value);
             });
           }
           return const Center(
@@ -58,13 +58,13 @@ class _ProductOverviewScreen extends State<ProductOverviewScreen> {
   }
 
   Widget buildShoppingCartIcon(){
-    return Consumer<CartManager>(
+    return Consumer<ListMenuManager>(
      builder: (context, cartManager, child)  {
       return TopRightBadge(
       data: cartManager.productCount,
       child: IconButton(icon: const Icon(Icons.check),
       onPressed: () {
-        Navigator.of(context).pushNamed(CartScreen.routeName);
+        Navigator.of(context).pushNamed(ListMenuScreen.routeName);
       },),
       
     );

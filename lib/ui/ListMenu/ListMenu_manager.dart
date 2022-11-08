@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:myshop/model/product.dart';
+import 'package:myshop/model/Menu.dart';
 
-import '../../model/cart_item.dart';
+import '../../model/ListMenu.dart';
 
-class CartManager with ChangeNotifier{
-  final Map<String, CartItem> _items = {
+class ListMenuManager with ChangeNotifier{
+  final Map<String, ListMenu> _items = {
    
   };
 
@@ -12,23 +12,23 @@ class CartManager with ChangeNotifier{
     return _items.length;
   }
 
-  List<CartItem> get product {
+  List<ListMenu> get product {
     return _items.values.toList();
   }
 
-  Iterable<MapEntry<String, CartItem>> get productEntries{
+  Iterable<MapEntry<String, ListMenu>> get productEntries{
     return _items.entries;
   }
 
-  double get totalAmount{
-    var total = 0.0;
-    _items.forEach((key, CartItem) { 
-      total += CartItem.price * CartItem.quantity;
-    });
-    return total;
-  }
+  // double get totalAmount{
+  //   var total = 0.0;
+  //   _items.forEach((key, CartItem) { 
+  //     total += CartItem.price * CartItem.quantity;
+  //   });
+  //   return total;
+  // }
 
-  void addItem(Product product){
+  void addItem(Menu product){
     if(_items.containsKey(product.id)){
       _items.update(
         product.id!,
@@ -40,7 +40,7 @@ class CartManager with ChangeNotifier{
     else{
       _items.putIfAbsent(
        product.id! , 
-        () => CartItem(id: 'c${DateTime.now().toIso8601String()}', title: product.title, quantity: 1, price: product.price, imageUrl: product.imageUrl));
+        () => ListMenu(id: 'c${DateTime.now().toIso8601String()}', title: product.title, quantity: 1, imageUrl: product.imageUrl));
     }
     notifyListeners();
   }

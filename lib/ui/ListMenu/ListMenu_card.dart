@@ -1,16 +1,16 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:myshop/ui/cart/cart_manager.dart';
+import 'package:myshop/ui/ListMenu/ListMenu_manager.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/cart_item.dart';
+import '../../model/ListMenu.dart';
 import '../share/dialog_utils.dart';
 
-class CartItemCard extends StatelessWidget {
+class ListMenuCard extends StatelessWidget {
   final String productId;
-  final CartItem cardItem;
-  const CartItemCard({
+  final ListMenu cardItem;
+  const ListMenuCard({
     required this.productId,
     required this.cardItem,
     super.key
@@ -41,7 +41,7 @@ class CartItemCard extends StatelessWidget {
          'Do you want remove the item from the cart?',);
       },
       onDismissed: (direction) {
-       context.read<CartManager>().removeItem(productId);
+       context.read<ListMenuManager>().removeItem(productId);
       },
       child: buildItemCard(),
       

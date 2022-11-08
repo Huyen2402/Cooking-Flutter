@@ -2,19 +2,19 @@
 
 import 'package:flutter/foundation.dart';
 
-class Product{
-  final String? id;
-  final String title;
-  final String description;
-  final double price;
-  final String imageUrl;
+class Menu{
+   String? id;
+   String title;
+   String description;
+ 
+   String imageUrl;
   final ValueNotifier<bool> _isFavorite;
 
-  Product({
+  Menu({
     this.id,
     required this.title,
     required this.description,
-    required this.price,
+   
     required this.imageUrl,
     isFavorite = false,
   }) : _isFavorite = ValueNotifier(isFavorite);
@@ -30,19 +30,19 @@ return _isFavorite.value;
     return _isFavorite;
   }
 
-  Product copyWith({
+  Menu copyWith({
      String? id,
    String? title,
    String? description,
-   double? price,
+ 
    String? imageUrl,
    bool? isFavorite,
   }){
-    return Product(
+    return Menu(
       id: id ?? this.id,
       title: title ?? this.title, 
       description: description ?? this.description, 
-      price: price ?? this.price, 
+      
       imageUrl: imageUrl ?? this.imageUrl,
       isFavorite: isFavorite ?? this.isFavorite
       );
@@ -52,13 +52,13 @@ return _isFavorite.value;
     return{
       'title':title,
       'description': description,
-      'price': price,
+  
       'imageUrl':imageUrl,
     };
   }
 
-  static Product fromJson(Map<String, dynamic> json){
-    return Product(id: json['id'], description: json['description'], price: json['price'], imageUrl: json['imageUrl'], title: json['title']);
+  static Menu fromJson(Map<String, dynamic> json){
+    return Menu(id: json['id'], description: json['description'], imageUrl: json['imageUrl'], title: json['title']);
   }
 
 }

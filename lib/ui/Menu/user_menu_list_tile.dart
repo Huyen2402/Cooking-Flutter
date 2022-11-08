@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:myshop/ui/products/edit_product_screen.dart';
+import 'package:myshop/ui/Menu/EditMenu_screen.dart';
 import 'package:provider/provider.dart';
-import '../../model/product.dart';
-import 'products_manager.dart';
+import '../../model/Menu.dart';
+import 'Menu_manager.dart';
 
 class UserProductListTile extends StatelessWidget {
-  final Product product;
+  final Menu product;
   const UserProductListTile(this.product, {super.key});
   
 
@@ -47,7 +47,7 @@ class UserProductListTile extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.delete),
       onPressed: () {
-        context.read<ProductManager>().deleteProduct(product.id!);
+        context.read<MenuManager>().deleteProduct(product.id!);
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(

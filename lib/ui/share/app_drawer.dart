@@ -22,18 +22,18 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.fastfood),
-            title: const Text('Món ăn của bạn'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
-            },
-          ),
+          // const Divider(),
+          // ListTile(
+          //   leading: const Icon(Icons.fastfood),
+          //   title: const Text('Món ăn của bạn'),
+          //   onTap: () {
+          //     Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
+          //   },
+          // ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.edit),
-            title: const Text('Manager Products'),
+            title: const Text('Chỉnh sửa món ăn'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(UserProductScreen.routeName);
             },

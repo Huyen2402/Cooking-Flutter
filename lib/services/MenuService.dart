@@ -2,21 +2,21 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import '../model/product.dart';
+import '../model/Menu.dart';
 import '../model/auth_token.dart';
 import 'services_firebase.dart';
 
 class ProductService extends FirebaseService {
   ProductService([AuthToken? authToken]) : super(authToken);
 
-  Future<List<Product>> fetchProducts([bool filterByUer = false]) async {
-    final List<Product> products = [];
+  Future<List<Menu>> fetchProducts([bool filterByUer = false]) async {
+    final List<Menu> products = [];
     try {
       final filter =
           filterByUer ? 'orderBy="creatorId"&equalTo="$userId"' : '';
       print(filter);
       final productUrl =
-          Uri.parse('$databaseUrl/products.json?auth=$token&$filter');
+          Uri.parse('$databaseUrl/menu.json?auth=$token&$filter');
       final response = await http.get(productUrl);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
       if (response.statusCode != 200) {
@@ -31,7 +31,7 @@ class ProductService extends FirebaseService {
         final isFavorite = (userFavoriteMap == null)
             ? false
             : (userFavoriteMap[productId] ?? false);
-        products.add(Product.fromJson({
+        products.add(Menu.fromJson({
           'id': productId,
           ...product,
         }).copyWith(isFavorite: isFavorite));
@@ -43,9 +43,9 @@ class ProductService extends FirebaseService {
     }
   }
 
-  Future<Product?> addProduct(Product product) async {
+  Future<Menu?> addProduct(Menu product) async {
     try {
-      final url = Uri.parse('$databaseUrl/products.json?auth$token');
+      final url = Uri.parse('$databaseUrl/menu.json?auth$token');
       final responde = await http.post(url,
           body: json.encode(product.toJson()
             ..addAll({
@@ -63,17 +63,27 @@ class ProductService extends FirebaseService {
     }
   }
 
-  Future<bool> updateProduct(Product product) async{
+  
+  Future<bool> updateProduct(Menu product) async{
+    
     try{
+      
       final url =
-      Uri.parse('$databaseUrl/products/${product.id}.json?auth=$token');
-      final response = await http.patch(
+      Uri.parse('$databaseUrl/menu/${product.id}.json?auth=$token');
+     
+      final response = await http.put(
         url,
-        body: json.encode(product.toJson())
+        body: json.encode(product.toJson() 
+        ..addAll({
+              'creatorId': userId,
+            }))
       );
+ 
       if(response.statusCode != 200){
-        throw Exception(json.decode(response.body));
+       
+        throw Exception(json.decode(response.body)['error']);
       }
+      
       return true;
       
     }catch(error){
@@ -85,7 +95,7 @@ class ProductService extends FirebaseService {
   Future<bool> deleteProduct (String id) async{
     try{
        final url =
-      Uri.parse('$databaseUrl/products/$id.json?auth=$token');
+      Uri.parse('$databaseUrl/menu/$id.json?auth=$token');
       final response = await http.delete(url);
       if(response.statusCode != 200){
         throw Exception(json.decode(response.body)['error']);
@@ -96,10 +106,10 @@ class ProductService extends FirebaseService {
       return false;
     }
   }
-Future<bool> saveFavoriteStatus (Product product) async{
+Future<bool> saveFavoriteStatus (Menu product) async{
   try{
      final url =
-      Uri.parse('$databaseUrl/products/${product.id}.json?auth=$token');
+      Uri.parse('$databaseUrl/menu/${product.id}.json?auth=$token');
 final response = 
 await http.put(url, 
 body: json.encode(product.isFavorite,));

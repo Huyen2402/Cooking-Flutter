@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:myshop/ui/share/app_drawer.dart';
 import 'package:provider/provider.dart';
-import 'user_products_list_tile.dart';
+import 'user_menu_list_tile.dart';
 
 
 class UserProductScreen extends StatelessWidget {
@@ -10,16 +10,16 @@ class UserProductScreen extends StatelessWidget {
   const UserProductScreen({super.key});
 
   Future<void> _refreshProduct (BuildContext context) async{
-    await context.read<ProductManager>().fetchProduct(true);
+    await context.read<MenuManager>().fetchProduct(true);
   }
 
   @override
   Widget build(BuildContext context) {
-    final productManager = ProductManager();
+    final productManager = MenuManager();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Product'),
+        title: const Text('Chỉnh sửa món ăn'),
         actions: <Widget>[
           buildAddButton(context),
         ],
@@ -38,8 +38,8 @@ class UserProductScreen extends StatelessWidget {
     );
   }
 
-  Widget buildUserProductListView(ProductManager productManager) {
-    return Consumer<ProductManager>(
+  Widget buildUserProductListView(MenuManager productManager) {
+    return Consumer<MenuManager>(
       builder: (ctx, productsManager, child) {
         return ListView.builder(
           itemCount: productsManager.itemcount,

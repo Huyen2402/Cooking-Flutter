@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../model/product.dart';
-import 'product_gird_title.dart';
-import 'products_manager.dart';
+import '../../model/Menu.dart';
+import 'Menu_gird_title.dart';
+import 'Menu_manager.dart';
 
-class ProductGrid extends StatelessWidget {
+class MenuGrid extends StatelessWidget {
   final bool showFavorite;
-  const ProductGrid(this.showFavorite, {super.key});
+  const MenuGrid(this.showFavorite, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final products = context.select<ProductManager, List<Product>>(
+    final products = context.select<MenuManager, List<Menu>>(
         (productManager) =>
             showFavorite ? productManager.favoriteItems : productManager.items);
 

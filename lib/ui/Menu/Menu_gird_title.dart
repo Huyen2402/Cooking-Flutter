@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
-import '../../model/product.dart';
-import 'products_detail_screen.dart';
+import '../../model/Menu.dart';
+import 'Menu_Detail_Screen.dart';
 
 class ProductGirdTitle extends StatelessWidget {
   const ProductGirdTitle(this.product, {super.key});
-  final Product product;
+  final Menu product;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class ProductGirdTitle extends StatelessWidget {
           Icons.add,
         ),
         onPressed: () {
-          final cart = context.read<CartManager>();
+          final cart = context.read<ListMenuManager>();
           cart.addItem(product);
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()

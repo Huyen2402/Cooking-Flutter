@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../model/product.dart';
+import '../../model/Menu.dart';
 
 class ProductDetailScreen extends StatelessWidget {
     static const routeName = '/product-detail';
   const ProductDetailScreen(this.product, {super.key});
 
-  final Product product;
+  final Menu product;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Text(
-              '\$${product.price}' ,
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 20,
-              ),     
-                  ),
+            // Text(
+            //   '\$${product.price}' ,
+            //   style: const TextStyle(
+            //     color: Colors.grey,
+            //     fontSize: 20,
+            //   ),     
+            //       ),
               const SizedBox(
                 height: 10),
                 Container(

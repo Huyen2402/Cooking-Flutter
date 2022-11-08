@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (cyx) => AuthManager(),
         ),
-        ChangeNotifierProxyProvider<AuthManager, ProductManager>(
-          create: (ctx) => ProductManager(),
+        ChangeNotifierProxyProvider<AuthManager, MenuManager>(
+          create: (ctx) => MenuManager(),
           update: (ctx, authManager, productsManager) {
           // Khi authManager có báo hiệu thay đổi thì đọc lại authToken
           // cho productManager
@@ -30,11 +30,8 @@ class MyApp extends StatelessWidget {
           },
           ),
         ChangeNotifierProvider(
-          create: (cyx) => CartManager(),
+          create: (cyx) => ListMenuManager(),
         ),
-        ChangeNotifierProvider(
-          create: (cyx) => OderManager(),
-        )
       ],
       child: Consumer<AuthManager>(
         builder: (context, authManager, child) {
@@ -55,8 +52,8 @@ class MyApp extends StatelessWidget {
                 return snapshot.connectionState == ConnectionState.waiting ? const SplashScreen() : const AuthScreen();
               }),
             routes: {
-              CartScreen.routeName: (context) => const CartScreen(),
-              OrdersScreen.routeName: (context) => const OrdersScreen(),
+              ListMenuScreen.routeName: (context) => const ListMenuScreen(),
+              // OrdersScreen.routeName: (context) => const OrdersScreen(),
               UserProductScreen.routeName: (context) => const UserProductScreen(),
               
             },
@@ -67,7 +64,7 @@ class MyApp extends StatelessWidget {
                   builder: (ctx) {
                     return EditProductScreen(
                      
-                           ctx.read<ProductManager>().findById(productId),
+                           ctx.read<MenuManager>().findById(productId),
                           
                     );
                   },
@@ -79,7 +76,7 @@ class MyApp extends StatelessWidget {
                   builder: (ctx) {
                     return ProductDetailScreen(
                      
-                           ctx.read<ProductManager>().findById(productId),
+                           ctx.read<MenuManager>().findById(productId),
                           
                     );
                   },
