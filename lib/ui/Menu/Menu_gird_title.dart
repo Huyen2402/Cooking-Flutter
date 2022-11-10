@@ -13,7 +13,7 @@ class ProductGirdTitle extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
-        footer: buildGirdFooterBar(context),
+        
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(ProductDetailScreen.routeName,

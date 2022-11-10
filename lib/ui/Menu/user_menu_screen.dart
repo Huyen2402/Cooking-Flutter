@@ -10,22 +10,14 @@ class UserProductScreen extends StatelessWidget {
   const UserProductScreen({super.key});
 
   Future<void> _refreshProduct (BuildContext context) async{
-    await context.read<MenuManager>().fetchProduct(true);
+    await context.read<MenuManager>().fetchMenu(true);
   }
 
   @override
   Widget build(BuildContext context) {
     final productManager = MenuManager();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chỉnh sửa món ăn'),
-        actions: <Widget>[
-          buildAddButton(context),
-        ],
-      ),
-      drawer: const AppDrawer(),
-      body: FutureBuilder(
+    return  FutureBuilder(
         future: _refreshProduct(context),
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
@@ -34,8 +26,8 @@ class UserProductScreen extends StatelessWidget {
             );
           }
           return RefreshIndicator(child: buildUserProductListView(productManager), onRefresh: () => _refreshProduct(context));
-        })
-    );
+        });
+    
   }
 
   Widget buildUserProductListView(MenuManager productManager) {

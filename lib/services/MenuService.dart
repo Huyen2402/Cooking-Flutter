@@ -5,11 +5,12 @@ import 'package:provider/provider.dart';
 import '../model/Menu.dart';
 import '../model/auth_token.dart';
 import 'services_firebase.dart';
+import 'dart:developer';
 
 class ProductService extends FirebaseService {
   ProductService([AuthToken? authToken]) : super(authToken);
 
-  Future<List<Menu>> fetchProducts([bool filterByUer = false]) async {
+  Future<List<Menu>> fetchMenu([bool filterByUer = false]) async {
     final List<Menu> products = [];
     try {
       final filter =
@@ -43,7 +44,7 @@ class ProductService extends FirebaseService {
     }
   }
 
-  Future<Menu?> addProduct(Menu product) async {
+  Future<Menu?> addMenu(Menu product) async {
     try {
       final url = Uri.parse('$databaseUrl/menu.json?auth$token');
       final responde = await http.post(url,
@@ -64,7 +65,7 @@ class ProductService extends FirebaseService {
   }
 
   
-  Future<bool> updateProduct(Menu product) async{
+  Future<bool> updateMenu(Menu product) async{
     
     try{
       
@@ -78,9 +79,10 @@ class ProductService extends FirebaseService {
               'creatorId': userId,
             }))
       );
+      print(product.title);
  
       if(response.statusCode != 200){
-       
+      
         throw Exception(json.decode(response.body)['error']);
       }
       

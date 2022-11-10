@@ -71,7 +71,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     try {
       final productsManager = context.read<MenuManager>();
       if (_editedProduct.id != null) {
-        await productsManager.updateProduct(_editedProduct);
+        await productsManager.updateMenu(_editedProduct);
       } else {
         await productsManager.addProduct(_editedProduct);
       }
@@ -131,6 +131,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
         }
         return null;
       },
+      onSaved: (newValue) {
+        _editedProduct = _editedProduct.copyWith(title: newValue);
+      },
     );
   }
 
@@ -150,6 +153,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
           return 'Should be at least 10 characters long';
         }
         return null;
+      },
+       onSaved: (newValue) {
+        _editedProduct = _editedProduct.copyWith(description: newValue);
       },
     );
   }

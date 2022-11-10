@@ -36,16 +36,24 @@ class MyApp extends StatelessWidget {
       child: Consumer<AuthManager>(
         builder: (context, authManager, child) {
           return MaterialApp(
-            title: 'My Shop',
             debugShowCheckedModeBanner: false,
+            title: 'Recipe app',
             theme: ThemeData(
-              fontFamily: 'Lato',
-              colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.blueGrey,
-              ).copyWith(
-                secondary: Colors.pink,
-              ),
+              backgroundColor: Colors.deepPurple,
+              appBarTheme: const AppBarTheme(color: Colors.deepPurple, elevation: 0),
+              visualDensity: VisualDensity.adaptivePlatformDensity
             ),
+            // title: 'My Shop',
+            // debugShowCheckedModeBanner: false,
+            // theme: ThemeData(
+            //   fontFamily: 'Lato',
+            
+            //   colorScheme: ColorScheme.fromSwatch(
+            //     primarySwatch: Colors.blueGrey,
+            //   ).copyWith(
+            //     secondary: Colors.pink,
+            //   ),
+            // ),
             home: authManager.isAuth ? const ProductOverviewScreen() : FutureBuilder(
               future: authManager.tryAutoLogin(),
               builder: (context, snapshot) {

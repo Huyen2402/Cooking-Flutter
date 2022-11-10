@@ -57,6 +57,7 @@ class AuthService {
   }
 
   Future<AuthToken> login(String email, String password) {
+   
     return _authenticate(email, password, 'signInWithPassword');
   }
 

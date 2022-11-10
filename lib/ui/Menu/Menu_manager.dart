@@ -15,28 +15,28 @@ class MenuManager with ChangeNotifier{
     _productService.authToken = authToken;
   }
 
-  Future<void> fetchProduct([bool filterByUer = false]) async{
-    _items = await _productService.fetchProducts(filterByUer);
+  Future<void> fetchMenu([bool filterByUer = false]) async{
+    _items = await _productService.fetchMenu(filterByUer);
     notifyListeners();
   }
 
    Future<void> addProduct(Menu product) async{
-    final newProduct = await _productService.addProduct(product);
+    final newProduct = await _productService.addMenu(product);
     if(newProduct != null){
       _items.add(newProduct);
        notifyListeners();
     }
    
   }
-  Future<void> updateProduct(Menu product) async{
-    final index= _items.indexWhere((item) => item.id == product.id);
+  Future<void> updateMenu(Menu menu) async{
+    final index= _items.indexWhere((item) => item.id == menu.id);
    if(index != null){
        print(index);
    
-      if(await _productService.updateProduct(product)){
-      _items[index].description = product.description;
-      _items[index].title = product.title;
-      print(product.title);
+      if(await _productService.updateMenu(menu)){
+      _items[index].description = menu.description;
+      _items[index].title = menu.title;
+      print(menu.title);
 
 
       notifyListeners();
@@ -82,7 +82,7 @@ class MenuManager with ChangeNotifier{
     }
   }
 
- Future<void>  deleteProduct(String id) async{
+ Future<void>  deleteMenu(String id) async{
  final index= _items.indexWhere((item) => item.id == id);
  Menu? existingProduct = _items[index];
  _items.removeAt(index);

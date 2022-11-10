@@ -75,6 +75,8 @@ flutter:
         - asset: assets/fonts/Anton-Regular.ttf
   assets:
     - .env
+    - assets/283244875_1337035116819947_326616987333753633_n.jpg
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

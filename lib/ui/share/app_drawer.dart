@@ -8,36 +8,14 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      
       child: Column(
         children: <Widget>[
           AppBar(
             title: const Text('Cooking with me'),
             automaticallyImplyLeading: false,
           ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.food_bank),
-            title: const Text('Món ăn'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('/');
-            },
-          ),
-          // const Divider(),
-          // ListTile(
-          //   leading: const Icon(Icons.fastfood),
-          //   title: const Text('Món ăn của bạn'),
-          //   onTap: () {
-          //     Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
-          //   },
-          // ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Chỉnh sửa món ăn'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(UserProductScreen.routeName);
-            },
-          ),
+          
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
