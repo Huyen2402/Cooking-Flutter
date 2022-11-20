@@ -14,7 +14,8 @@ class EditProductScreen extends StatefulWidget {
       this.product1 = Menu(
         id: null,
         title: '',
-       
+       rating: '',
+        time: '',
         description: '',
         imageUrl: '',
       );
@@ -90,7 +91,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Product'),
+        title: const Text('Cập nhật món ăn'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.save),

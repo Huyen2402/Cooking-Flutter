@@ -10,71 +10,118 @@ class ProductGirdTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        
-        child: GestureDetector(
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 30),
+      width: MediaQuery.of(context).size.width,
+      height: 180,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.6),
+            offset: const Offset(
+              0.0,
+              10.0,
+
+            ),
+            blurRadius: 10.0,
+            spreadRadius: -6.0
+          )
+        ],
+        image: DecorationImage(
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.35),
+            BlendMode.multiply,
+            
+            ),
+            image: NetworkImage(product.imageUrl),
+             fit: BoxFit.cover,
+          )
+      ),
+      child: Stack(
+       
+        children: [
+          GestureDetector(
+            
           onTap: () {
             Navigator.of(context).pushNamed(ProductDetailScreen.routeName,
                 arguments: product.id);
           },
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
+          
           ),
-        ),
+          buildGiaoDienItems(),
+          buildGirdFooterBar(),
+          
+        ],
       ),
+    
     );
   }
 
-  Widget buildGirdFooterBar(BuildContext context) {
-    return GridTileBar(
-      backgroundColor: Color.fromARGB(221, 149, 199, 202),
-      // leading: ValueListenableBuilder<bool>(
-      //   valueListenable: product.isFavoriteListenable,
-      //   builder: (ctx, isFavorite, child) {
-      //     return IconButton(
-      //       icon: Icon(
-      //         isFavorite ? Icons.favorite : Icons.favorite_border,
-      //       ),
-      //       color: Theme.of(context).colorScheme.secondary,
-      //       onPressed: () {
-      //       ctx.read<ProductManager>().toggleFavoriteStatus(product);
-      //       },
-      //     );
-      //   },
-      // ),
-      title: Text(
-        product.title,
-        textAlign: TextAlign.center,
-      ),
-      trailing: IconButton(
-        icon: const Icon(
-          Icons.add,
-        ),
-        onPressed: () {
-          final cart = context.read<ListMenuManager>();
-          cart.addItem(product);
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: const Text(
-                  'Thêm món ăn vào thực đơn hôm nay',
-                ),
-                duration: const Duration(seconds: 2),
-                action: SnackBarAction(
-                  label: 'UNDO',
-                  onPressed: () {
-                    cart.removeSingleItem(product.id!);
-                  },
-                ),
+  Widget buildGiaoDienItems(){
+    return Align(
+            
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Text(
+                product.title,
+                style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textAlign: TextAlign.center,
               ),
-            );
-        },
-        color: Theme.of(context).colorScheme.secondary,
-      ),
-    );
+            ),
+          
+          );
+  }
+
+  Widget buildGirdFooterBar() {
+    return  Align(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:  [
+                Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 172, 62, 62).withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    children:[
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                        size: 10,
+                      ),
+                      SizedBox(width: 7,),
+                      Text(product.rating),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color:  Color.fromARGB(255, 172, 62, 62).withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(15)
+                
+                  ),
+                  child: Row(children: [
+                    Icon(
+                      Icons.schedule,
+                      color: Colors.yellow,
+                      size: 18,
+                    ),
+                    SizedBox(width: 7,),
+                   Text(product.time),
+                  ]),
+                )
+              ],
+            ),
+            alignment: Alignment.bottomLeft,
+          );
   }
 }

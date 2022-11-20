@@ -121,7 +121,9 @@ class _AuthCardState extends State<AuthCard> {
                 height: 20,
               ),
               _buildPasswordField(),
-              if (_authMode == AuthMode.signup) _buildPasswordConfirmField(),
+              if (_authMode == AuthMode.signup)
+              
+               _buildPasswordConfirmField(),
               
                 const SizedBox(
                   height: 20,
@@ -136,33 +138,7 @@ class _AuthCardState extends State<AuthCard> {
                   },
                 ),
                 _buildAuthModeSwitchButton(),
-              // Align(
-              //   alignment: Alignment.centerRight,
-              //   child: TextButton(onPressed: () {
-                  
-              //   },
-              //   child: const Text("Quên Mật Khẩu"),
-                
-              //   ),
-              // ),
-              // ElevatedButton(
-              //   style: TextButton.styleFrom(
-              //     backgroundColor: Colors.deepPurple,
-              //     padding: const EdgeInsets.symmetric(horizontal: 50)
-              //   ),
-              //   onPressed: (){},
-              
-              //  child: const Text("Đăng Nhập")
-              //  ),
-              //  Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children:  [
-              //     const Text("Bạn chưa có tài khoản??"),
-              //     TextButton(onPressed: (){}, 
-              //     child: const Text("Đăng Ký"))
-              //   ],
-              //  )
-
+            
             ]),)
             )
              
@@ -189,44 +165,7 @@ class _AuthCardState extends State<AuthCard> {
           
         ],
       );
-    // return Card(
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(10.0),
-    //   ),
-    //   elevation: 8.0,
-    //   child: Container(
-    //     height: _authMode == AuthMode.signup ? 320 : 260,
-    //     constraints:
-    //         BoxConstraints(minHeight: _authMode == AuthMode.signup ? 320 : 260),
-    //     width: deviceSize.width * 0.75,
-    //     padding: const EdgeInsets.all(16.0),
-    //     child: Form(
-    //       key: _formKey,
-    //       child: SingleChildScrollView(
-    //         child: Column(
-    //           children: <Widget>[
-    //             _buildEmailField(),
-    //             _buildPasswordField(),
-    //             if (_authMode == AuthMode.signup) _buildPasswordConfirmField(),
-    //             const SizedBox(
-    //               height: 20,
-    //             ),
-    //             ValueListenableBuilder<bool>(
-    //               valueListenable: _isSubmitting,
-    //               builder: (context, isSubmitting, child) {
-    //                 if (isSubmitting) {
-    //                   return const CircularProgressIndicator();
-    //                 }
-    //                 return _buildSubmitButton();
-    //               },
-    //             ),
-    //             _buildAuthModeSwitchButton(),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
+   
   }
 
   Widget _buildAuthModeSwitchButton() {
@@ -256,36 +195,11 @@ class _AuthCardState extends State<AuthCard> {
               //  child: const Text("Đăng Nhập")
                 child: Text(_authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP'),
                );
-    // return ElevatedButton(
-    //   onPressed: _submit,
-    //   style: ElevatedButton.styleFrom(
-    //     shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.circular(30),
-    //     ),
-    //     backgroundColor: Theme.of(context).primaryColor,
-    //     padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-    //     textStyle: TextStyle(
-    //       color: Theme.of(context).primaryTextTheme.headline6?.color,
-    //     ),
-    //   ),
-    //   child: Text(_authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP'),
-    // );
+   
   }
 
   Widget _buildPasswordConfirmField() {
-    // return TextFormField(
-    //   enabled: _authMode == AuthMode.signup,
-    //   decoration: const InputDecoration(labelText: 'Confirm Password'),
-    //   obscureText: true,
-    //   validator: _authMode == AuthMode.signup
-    //       ? (value) {
-    //           if (value != _passwordController.text) {
-    //             return 'Passwords do not match!';
-    //           }
-    //           return null;
-    //         }
-    //       : null,
-    // );
+   
     return  TextFormField(
        enabled: _authMode == AuthMode.signup,
       decoration: InputDecoration(
@@ -324,36 +238,11 @@ class _AuthCardState extends State<AuthCard> {
         _authData['password'] = value!;
       },
     );
-    // return TextFormField(
-    //   decoration: const InputDecoration(labelText: 'Password'),
-    //   obscureText: true,
-    //   controller: _passwordController,
-    //   validator: (value) {
-    //     if (value == null || value.length < 5) {
-    //       return 'Password is too short!';
-    //     }
-    //     return null;
-    //   },
-    //   onSaved: (value) {
-    //     _authData['password'] = value!;
-    //   },
-    // );
+   
   }
 
   Widget _buildEmailField() {
-    // return TextFormField(
-    //   decoration: const InputDecoration(labelText: 'E-Mail'),
-    //   keyboardType: TextInputType.emailAddress,
-    //   validator: (value) {
-    //     if (value!.isEmpty || !value.contains('@')) {
-    //       return 'Invalid email!';
-    //     }
-    //     return null;
-    //   },
-    //   onSaved: (value) {
-    //     _authData['email'] = value!;
-    //   },
-    // );
+   
     return TextFormField(
       decoration: InputDecoration(
         labelText: 'E-Mail',

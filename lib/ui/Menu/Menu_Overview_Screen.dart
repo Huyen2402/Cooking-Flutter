@@ -27,8 +27,7 @@ class ProductOverviewScreen extends StatefulWidget {
 
 class _ProductOverviewScreen extends State<ProductOverviewScreen> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
   ListMenuScreen(),
     UserProductScreen(),
@@ -53,7 +52,7 @@ class _ProductOverviewScreen extends State<ProductOverviewScreen> {
    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recipe app'),
+        title: const Text('Cooking with me'),
        
       ),
       drawer:  const AppDrawer(
@@ -62,27 +61,6 @@ class _ProductOverviewScreen extends State<ProductOverviewScreen> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      
-    
-      // body: FutureBuilder(
-      
-        
-      //   future: _fetchProducts,
-      //   builder: ((context, snapshot) {
-      //     if(snapshot.connectionState == ConnectionState.done){
-      //       return ValueListenableBuilder<bool>(valueListenable: _showOnlyFavorite, 
-      //       builder: (context, value, child) {
-              
-      //         return MenuGrid(value);
-      //       });
-      //     }
-          
-      //     return const Center(
-      //       child: CircularProgressIndicator(),
-            
-      //     );
-      //   }),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         builder: (context, authManager, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Recipe app',
+            title: 'Cooking with me',
             theme: ThemeData(
               backgroundColor: Colors.deepPurple,
               appBarTheme: const AppBarTheme(color: Colors.deepPurple, elevation: 0),
