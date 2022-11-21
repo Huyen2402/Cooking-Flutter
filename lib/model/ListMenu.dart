@@ -19,7 +19,7 @@ ListMenu copyWith({
   String? id,
   String? title,
   int? quantity,
-  // double? price,
+
   String? imageUrl
 }){
   return ListMenu(

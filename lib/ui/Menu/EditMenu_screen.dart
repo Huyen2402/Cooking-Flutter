@@ -4,14 +4,14 @@ import '../../model/Menu.dart';
 import '../share/dialog_utils.dart';
 import 'Menu_manager.dart';
 
-class EditProductScreen extends StatefulWidget {
+class EditMenuScreen extends StatefulWidget {
   static const routeName = '/edit-product';
-  EditProductScreen(
-    Menu? product, {
+  EditMenuScreen(
+    Menu? menu, {
     super.key,
   }) {
-    if (product == null) {
-      this.product1 = Menu(
+    if (menu == null) {
+      this.menu = Menu(
         id: null,
         title: '',
        rating: '',
@@ -20,19 +20,19 @@ class EditProductScreen extends StatefulWidget {
         imageUrl: '',
       );
     } else {
-      this.product1 = product;
+      this.menu = menu;
     }
   }
-  late final Menu product1;
+  late final Menu menu;
   @override
-  State<EditProductScreen> createState() => _EditProductScreenState();
+  State<EditMenuScreen> createState() => _EditMenuScreenState();
 }
 
-class _EditProductScreenState extends State<EditProductScreen> {
+class _EditMenuScreenState extends State<EditMenuScreen> {
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
   final _editForm = GlobalKey<FormState>();
-  late Menu _editedProduct;
+  late Menu _editMenu;
   var _isLoading = false;
   bool _isValidImageUrl(String value) {
     return (value.startsWith('http') || value.startsWith('http')) &&
@@ -49,8 +49,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
         setState(() {});
       }
     });
-    _editedProduct = widget.product1;
-    _imageUrlController.text = _editedProduct.imageUrl;
+    _editMenu = widget.menu;
+    _imageUrlController.text = _editMenu.imageUrl;
   }
 
   @override
@@ -70,11 +70,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
     try {
-      final productsManager = context.read<MenuManager>();
-      if (_editedProduct.id != null) {
-        await productsManager.updateMenu(_editedProduct);
+      final menuManager = context.read<MenuManager>();
+      if (_editMenu.id != null) {
+        await menuManager.updateMenu(_editMenu);
       } else {
-        await productsManager.addProduct(_editedProduct);
+        await menuManager.addProduct(_editMenu);
       }
     } catch (error) {
       await showErrorDialog(context, 'Something went wrong.');
@@ -110,7 +110,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: ListView(
                   children: <Widget>[
                     buildTitleField(),
-                   
+                   buildTime(),
+                   buildRating(),
                     buildDescriptionField(),
                     buildProductPreview(),
                   ],
@@ -122,7 +123,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   TextFormField buildTitleField() {
     return TextFormField(
-      initialValue: _editedProduct.title,
+      initialValue: _editMenu.title,
       decoration: const InputDecoration(labelText: 'Title'),
       textInputAction: TextInputAction.next,
       autofocus: true,
@@ -133,16 +134,49 @@ class _EditProductScreenState extends State<EditProductScreen> {
         return null;
       },
       onSaved: (newValue) {
-        _editedProduct = _editedProduct.copyWith(title: newValue);
+        _editMenu = _editMenu.copyWith(title: newValue);
       },
     );
   }
-
+  TextFormField buildTime() {
+    return TextFormField(
+      initialValue: _editMenu.time,
+      decoration: const InputDecoration(labelText: 'Time'),
+      textInputAction: TextInputAction.next,
+      autofocus: true,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a value';
+        }
+        return null;
+      },
+      onSaved: (newValue) {
+        _editMenu = _editMenu.copyWith(time: newValue);
+      },
+    );
+  }
+TextFormField buildRating() {
+    return TextFormField(
+      initialValue: _editMenu.rating,
+      decoration: const InputDecoration(labelText: 'Rating'),
+      textInputAction: TextInputAction.next,
+      autofocus: true,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a value';
+        }
+        return null;
+      },
+      onSaved: (newValue) {
+        _editMenu = _editMenu.copyWith(rating: newValue);
+      },
+    );
+  }
   
 
   TextFormField buildDescriptionField() {
     return TextFormField(
-      initialValue: _editedProduct.description,
+      initialValue: _editMenu.description,
       decoration: const InputDecoration(labelText: 'Description'),
       maxLines: 3,
       keyboardType: TextInputType.multiline,
@@ -156,7 +190,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         return null;
       },
        onSaved: (newValue) {
-        _editedProduct = _editedProduct.copyWith(description: newValue);
+        _editMenu = _editMenu.copyWith(description: newValue);
       },
     );
   }
@@ -209,7 +243,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(imageUrl: value);
+        _editMenu = _editMenu.copyWith(imageUrl: value);
       },
     );
   }

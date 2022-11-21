@@ -137,6 +137,7 @@ class _AuthCardState extends State<AuthCard> {
                     return _buildSubmitButton();
                   },
                 ),
+                
                 _buildAuthModeSwitchButton(),
             
             ]),)
@@ -170,6 +171,7 @@ class _AuthCardState extends State<AuthCard> {
 
   Widget _buildAuthModeSwitchButton() {
     return TextButton(
+      
       onPressed: _switchAuthMode,
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),

@@ -35,7 +35,7 @@ class UserProductListTile extends StatelessWidget {
       icon: const Icon(Icons.edit),
       onPressed: () {
         Navigator.of(context).pushNamed(
-          EditProductScreen.routeName,
+          EditMenuScreen.routeName,
           arguments: product.id,
         );
       },

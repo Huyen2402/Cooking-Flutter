@@ -66,11 +66,11 @@ class MyApp extends StatelessWidget {
               
             },
             onGenerateRoute: (settings) {
-              if (settings.name == EditProductScreen.routeName) {
+              if (settings.name == EditMenuScreen.routeName) {
                 final productId = settings.arguments as String;
                 return MaterialPageRoute(
                   builder: (ctx) {
-                    return EditProductScreen(
+                    return EditMenuScreen(
                      
                            ctx.read<MenuManager>().findById(productId),
                           
